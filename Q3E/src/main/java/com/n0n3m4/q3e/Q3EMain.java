@@ -47,7 +47,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.n0n3m4.q3e.device.Q3EOuya;
@@ -80,6 +82,8 @@ public class Q3EMain extends Activity
     private MenuItem            backMenu;
     private ImageView menuButton;
     private ImageView splashView;
+    private ProgressBar loadingProgressBar;
+    private TextView loadingStatusView;
     private final Handler handler = new Handler();
     private Runnable backCallback;
     private long splashShownAtMs;
@@ -219,14 +223,8 @@ public class Q3EMain extends Activity
         if(!CheckStart())
             return;
 
-        // extract game required resource in apk
-        gameHelper.ExtractGameResource();
-
-        // check support devices
-        Q3E.supportDevices = gameHelper.CheckDevices();
-
-        // init GUI component
-        InitGUI();
+        InitLoadingScreen();
+        StartGamePreparation();
     }
 
     @Override
@@ -402,6 +400,56 @@ public class Q3EMain extends Activity
 
         setContentView(mainLayout);
         SetupSplashOverlay();
+    }
+
+    private void InitLoadingScreen()
+    {
+        setContentView(R.layout.q3e_loading_screen);
+        loadingProgressBar = findViewById(R.id.q3e_loading_progress);
+        loadingStatusView = findViewById(R.id.q3e_loading_status);
+        UpdateLoadingProgress(10, getString(R.string.loading_preparing_game));
+    }
+
+    private void StartGamePreparation()
+    {
+        final String resourceLabel = gameHelper.GetGameResourceLabel();
+        if(resourceLabel != null)
+            UpdateLoadingProgress(25, getString(R.string.loading_extracting_resource_name, resourceLabel));
+        else
+            UpdateLoadingProgress(25, getString(R.string.loading_checking_resource));
+
+        Thread prepareThread = new Thread(() -> {
+            try
+            {
+                gameHelper.ExtractGameResource();
+                PostLoadingProgress(70, getString(R.string.loading_checking_devices));
+                final int supportDevices = gameHelper.CheckDevices();
+                runOnUiThread(() -> {
+                    Q3E.supportDevices = supportDevices;
+                    UpdateLoadingProgress(100, getString(R.string.loading_starting_game));
+                    InitGUI();
+                });
+            }
+            catch (Throwable throwable)
+            {
+                KLog.E("Game preparation failed: %s", throwable.getMessage());
+                runOnUiThread(() -> gameHelper.FatalError(String.valueOf(throwable.getMessage())));
+            }
+        }, "Q3E-Prepare");
+        prepareThread.start();
+    }
+
+    private void PostLoadingProgress(int progress, String text)
+    {
+        runOnUiThread(() -> UpdateLoadingProgress(progress, text));
+    }
+
+    private void UpdateLoadingProgress(int progress, String text)
+    {
+        if(loadingProgressBar != null)
+            loadingProgressBar.setProgress(progress);
+        if(loadingStatusView != null)
+            loadingStatusView.setText(text);
     }
 
     private void SetupSplashOverlay()

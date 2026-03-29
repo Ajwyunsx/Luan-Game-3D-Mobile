@@ -19,7 +19,7 @@ Luna Game 3D is an Android port project based on the `idTech4A++` / `Q3E` codeba
 ## Author And References
 
 - `Luna Game 3D` Android port author and maintainer: [Ajwyunsx](https://github.com/Ajwyunsx)
-- Luna Game 3D repository: [Ajwyunsx/Luan-Game-3D-Mobile](https://github.com/Ajwyunsx/Luan-Game-3D-Mobile)
+- Current GitHub repository: [Ajwyunsx/Luan-Game-3D-Mobile](https://github.com/Ajwyunsx/Luan-Game-3D-Mobile)
 - Original `Luna Game` series creator: `Anonymous Creator`
 - Original `Luna Game` official reference: [lunaga.me](https://lunaga.me/)
 - Original creator statement: the official site says the creator has "no plans on revealing my identity at this point"

@@ -75,4 +75,9 @@
     <string name="error">Error</string>
     <string name="restart">Restart</string>
     <string name="skin_deep_glsl_shader">Skin Deep GLSL shader</string>
+    <string name="loading_preparing_game">Preparing Luna Game 3D...</string>
+    <string name="loading_checking_resource">Checking built-in resources...</string>
+    <string name="loading_extracting_resource_name">Extracting resource: %1$s</string>
+    <string name="loading_checking_devices">Checking input devices...</string>
+    <string name="loading_starting_game">Starting game...</string>
 </resources>

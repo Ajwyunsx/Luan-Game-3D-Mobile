@@ -72,12 +72,16 @@ class Q3EGameHelper
 
     void ShowMessage(String s)
     {
-        Toast.makeText(m_context, s, Toast.LENGTH_LONG).show();
+        if(m_context == null)
+            return;
+        m_context.runOnUiThread(() -> Toast.makeText(m_context, s, Toast.LENGTH_LONG).show());
     }
 
     void ShowMessage(int resId)
     {
-        Toast.makeText(m_context, resId, Toast.LENGTH_LONG).show();
+        if(m_context == null)
+            return;
+        m_context.runOnUiThread(() -> Toast.makeText(m_context, resId, Toast.LENGTH_LONG).show());
     }
 
     int CheckDevices()
@@ -911,6 +915,27 @@ class Q3EGameHelper
             ExtractECWolfResource();
         else if(Q3E.q3ei.isSkinDeep) // GLSL shader
             ExtractSkinDeepGLSLShaderSource();
+    }
+
+    String GetGameResourceLabel()
+    {
+        if(Q3E.q3ei.isTDM)
+            return Q3ELang.tr(m_context, R.string.the_dark_mod_glsl_shader);
+        if(Q3E.q3ei.isD3BFG)
+            return Q3ELang.tr(m_context, R.string.rbdoom3_bfg_hlsl_shader);
+        if(Q3E.q3ei.isDOOM)
+            return Q3ELang.tr(m_context, R.string.zdoom_builtin_resource);
+        if(Q3E.q3ei.isXash3D)
+            return Q3ELang.tr(m_context, R.string.xash3d_extras);
+        if(Q3E.q3ei.isSource)
+            return Q3ELang.tr(m_context, R.string.sourceengine_extras);
+        if(Q3E.q3ei.isETW)
+            return Q3ELang.tr(m_context, R.string.etlegacy_extras);
+        if(Q3E.q3ei.isWolf3D)
+            return Q3ELang.tr(m_context, R.string.ecwolf_builtin_resource);
+        if(Q3E.q3ei.isSkinDeep)
+            return Q3ELang.tr(m_context, R.string.skin_deep_glsl_shader);
+        return null;
     }
 
     private int GetMSAA()
