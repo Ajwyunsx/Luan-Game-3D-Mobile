@@ -14,7 +14,6 @@ Luna Game 3D is an Android port project based on the `idTech4A++` / `Q3E` codeba
 
 - Main project title: `Luna Game 3D`
 - In-app game label: `Luna Game`
-- Android package: `com.luna.game`
 
 ## Author And References
 
