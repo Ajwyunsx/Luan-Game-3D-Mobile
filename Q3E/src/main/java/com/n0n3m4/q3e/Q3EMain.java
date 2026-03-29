@@ -775,7 +775,7 @@ public class Q3EMain extends Activity
             return false;
         }
         else
-            return gameHelper.checkGameFiles();
+            return true;
     }
 
     private void SetupGame()
