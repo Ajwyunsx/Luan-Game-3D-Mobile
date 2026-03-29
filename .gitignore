@@ -1,0 +1,45 @@
+.gradle
+.idea
+.androidide
+
+idTech4Amm/build
+idTech4Amm/release
+idTech4Amm/debug
+
+Q3E/.cxx
+Q3E/build
+
+build.log
+gradle assembleDebug.bat
+gradle assembleRelease.bat
+
+idTech4Amm/src/main/assets/source/DIII4A.source.tgz
+idTech4Amm/src/main/assets/source/LICENSE
+
+# MSVC
+CMakeFiles
+*.vcxproj*
+cmake_install.cmake
+CMakeCache.txt
+*.sln
+/x64
+/x86
+build
+Release
+Debug
+
+# Local environment and generated outputs
+local.properties
+*.apk
+.project
+.settings/
+current_prefs.xml
+device_current_prefs.xml
+new_package_prefs.xml
+old_package_prefs.xml
+old_package_prefs_utf8.xml
+prefs_audio_fixed.xml
+prefs_single_controls.xml
+prefs_tab_added.xml
+device_screen*.png
+launcher_icon.png
