@@ -78,6 +78,10 @@
     <string name="loading_preparing_game">Preparing Luna Game 3D...</string>
     <string name="loading_checking_resource">Checking built-in resources...</string>
     <string name="loading_extracting_resource_name">Extracting resource: %1$s</string>
+    <string name="loading_verifying_game_files">Verifying game data...</string>
     <string name="loading_checking_devices">Checking input devices...</string>
     <string name="loading_starting_game">Starting game...</string>
+    <string name="startup_authorization_title">Authorization Required</string>
+    <string name="startup_authorization_message">Luna Game 3D will automatically extract built-in resources and start the game. Select Authorize to continue.</string>
+    <string name="startup_authorization_continue">Authorize</string>
 </resources>

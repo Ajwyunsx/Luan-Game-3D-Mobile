@@ -168,12 +168,22 @@ class Q3EGameHelper
         }
     }
 
-    boolean checkGameFiles()
+    String GetMissingGameFilesMessage()
+    {
+        return Q3ELang.tr(m_context, R.string.game_files_weren_t_found_put_game_files_to) + Q3E.q3ei.GetGameDataDirectoryPath(null);
+    }
+
+    boolean HasGameFiles()
     {
         String dataDir = Q3E.q3ei.GetGameDataDirectoryPath(null);
-        if (!new File(dataDir).exists())
+        return new File(dataDir).exists();
+    }
+
+    boolean checkGameFiles()
+    {
+        if (!HasGameFiles())
         {
-            FatalError(Q3ELang.tr(m_context, R.string.game_files_weren_t_found_put_game_files_to) + dataDir);
+            FatalError(GetMissingGameFilesMessage());
             return false;
         }
 

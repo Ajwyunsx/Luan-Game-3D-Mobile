@@ -223,8 +223,7 @@ public class Q3EMain extends Activity
         if(!CheckStart())
             return;
 
-        InitLoadingScreen();
-        StartGamePreparation();
+        ShowStartupAuthorizationDialog();
     }
 
     @Override
@@ -410,6 +409,26 @@ public class Q3EMain extends Activity
         UpdateLoadingProgress(10, getString(R.string.loading_preparing_game));
     }
 
+    private void ShowStartupAuthorizationDialog()
+    {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.startup_authorization_title)
+                .setMessage(R.string.startup_authorization_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.startup_authorization_continue, (dialogInterface, which) -> {
+                    dialogInterface.dismiss();
+                    InitLoadingScreen();
+                    StartGamePreparation();
+                })
+                .setNegativeButton(R.string.quit, (dialogInterface, which) -> {
+                    dialogInterface.dismiss();
+                    finish();
+                })
+                .create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
     private void StartGamePreparation()
     {
         final String resourceLabel = gameHelper.GetGameResourceLabel();
@@ -422,7 +441,14 @@ public class Q3EMain extends Activity
             try
             {
                 gameHelper.ExtractGameResource();
-                PostLoadingProgress(70, getString(R.string.loading_checking_devices));
+                PostLoadingProgress(70, getString(R.string.loading_verifying_game_files));
+                if(!gameHelper.HasGameFiles())
+                {
+                    final String errorMessage = gameHelper.GetMissingGameFilesMessage();
+                    runOnUiThread(() -> gameHelper.FatalError(errorMessage));
+                    return;
+                }
+                PostLoadingProgress(85, getString(R.string.loading_checking_devices));
                 final int supportDevices = gameHelper.CheckDevices();
                 runOnUiThread(() -> {
                     Q3E.supportDevices = supportDevices;
