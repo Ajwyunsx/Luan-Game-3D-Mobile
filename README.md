@@ -23,6 +23,9 @@ Luna Game 3D is an Android port project based on the `idTech4A++` / `Q3E` codeba
 - Original `Luna Game` series creator: `Anonymous Creator`
 - Original `Luna Game` official reference: [lunaga.me](https://lunaga.me/)
 - Original creator statement: the official site says the creator has "no plans on revealing my identity at this point"
+- `Luna Game 3D` Game Jolt fangame creator: [MrCatalyseur](https://gamejolt.com/games/luna-game-3D/168956)
+- `Luna Game 3D` indexed reference: [The Indie Horror Game World Wiki](https://the-indie-horror-game-world.fandom.com/wiki/Luna_Game_3D_%282016%29)
+- `Luna Game Port` creator on Game Jolt / itch.io: [LucyYuih](https://gamejolt.com/games/Luna-Game-Port/901714) / [LuYuih](https://luyuih.itch.io/luna-game-port)
 - Upstream author reference: [glKarin](https://github.com/glKarin)
 - Original Android idTech / Q3E author reference: [n0n3m4](https://github.com/n0n3m4)
 - Upstream reference: [glKarin/com.n0n3m4.diii4a](https://github.com/glKarin/com.n0n3m4.diii4a)
@@ -54,5 +57,6 @@ idTech4Amm/build/outputs/apk/debug/idTech4Amm-debug.apk
 
 - This repository contains the Luna Game 3D customization layer built on top of upstream open-source engine work.
 - This project is not the original `Luna Game` fangame series release. The original series is credited to its anonymous creator on the official `lunaga.me` site.
+- This project is also separate from the older `Luna Game 3D` Game Jolt fangame commonly attributed to `MrCatalyseur`, and separate from the `Luna Game Port` release by `LucyYuih` / `LuYuih`.
 - Please keep upstream attribution when redistributing modified builds or source snapshots.
 - If you use this project as a base, keep the `Luna Game 3D` and `Luna Game` project naming clear when referring to this customized fork.
