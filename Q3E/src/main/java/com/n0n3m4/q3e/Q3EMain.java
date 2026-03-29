@@ -19,6 +19,7 @@
 
 package com.n0n3m4.q3e;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,10 +34,13 @@ import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.SizeF;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -87,6 +91,7 @@ public class Q3EMain extends Activity
     private final Handler handler = new Handler();
     private Runnable backCallback;
     private long splashShownAtMs;
+    private boolean mStartupStarted = false;
     private boolean m_pausedByAudioFocus = false;
     private AudioManager mAudioManager;
     private AudioFocusRequest mAudioFocusRequest;
@@ -100,6 +105,7 @@ public class Q3EMain extends Activity
 
     private static final float MENU_ICON_ALPHA = 1.0f;
     private static final int MENU_ICON_HIDE_DELAY = 10;
+    private static final int REQUEST_STARTUP_STORAGE_PERMISSION = 10010;
 
     private final Runnable splashWatcher = new Runnable() {
         @Override
@@ -223,7 +229,7 @@ public class Q3EMain extends Activity
         if(!CheckStart())
             return;
 
-        ShowStartupAuthorizationDialog();
+        EnsureStartupStoragePermission();
     }
 
     @Override
@@ -409,24 +415,39 @@ public class Q3EMain extends Activity
         UpdateLoadingProgress(10, getString(R.string.loading_preparing_game));
     }
 
-    private void ShowStartupAuthorizationDialog()
+    private void ContinueStartup()
     {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.startup_authorization_title)
-                .setMessage(R.string.startup_authorization_message)
-                .setCancelable(false)
-                .setPositiveButton(R.string.startup_authorization_continue, (dialogInterface, which) -> {
-                    dialogInterface.dismiss();
-                    InitLoadingScreen();
-                    StartGamePreparation();
-                })
-                .setNegativeButton(R.string.quit, (dialogInterface, which) -> {
-                    dialogInterface.dismiss();
-                    finish();
-                })
-                .create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        if(mStartupStarted)
+            return;
+        mStartupStarted = true;
+        InitLoadingScreen();
+        StartGamePreparation();
+    }
+
+    private void EnsureStartupStoragePermission()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        {
+            if(Environment.isExternalStorageManager())
+            {
+                ContinueStartup();
+                return;
+            }
+
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, REQUEST_STARTUP_STORAGE_PERMISSION);
+            return;
+        }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            requestPermissions(new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE }, REQUEST_STARTUP_STORAGE_PERMISSION);
+            return;
+        }
+
+        ContinueStartup();
     }
 
     private void StartGamePreparation()
@@ -864,6 +885,15 @@ public class Q3EMain extends Activity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == REQUEST_STARTUP_STORAGE_PERMISSION)
+        {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ContinueStartup();
+            else
+                finish();
+            return;
+        }
+
         if(permissionRequest.requestCode == requestCode && grantResults.length > 0)
         {
             boolean result = (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED);
@@ -872,6 +902,19 @@ public class Q3EMain extends Activity
                 permissionRequest.Result(result);
                 permissionRequest.notifyAll();
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_STARTUP_STORAGE_PERMISSION)
+        {
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R || Environment.isExternalStorageManager())
+                ContinueStartup();
+            else
+                finish();
         }
     }
 
