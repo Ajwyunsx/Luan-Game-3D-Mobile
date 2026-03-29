@@ -18,9 +18,11 @@ Luna Game 3D is an Android port project based on the `idTech4A++` / `Q3E` codeba
 
 ## Author And References
 
-- `Luna Game 3D` / `Luna Game` author: [Ajwyunsx](https://github.com/Ajwyunsx)
-- Luna Game 3D author and maintainer: [Ajwyunsx](https://github.com/Ajwyunsx)
+- `Luna Game 3D` Android port author and maintainer: [Ajwyunsx](https://github.com/Ajwyunsx)
 - Luna Game 3D repository: [Ajwyunsx/Luan-Game-3D-Mobile](https://github.com/Ajwyunsx/Luan-Game-3D-Mobile)
+- Original `Luna Game` series creator: `Anonymous Creator`
+- Original `Luna Game` official reference: [lunaga.me](https://lunaga.me/)
+- Original creator statement: the official site says the creator has "no plans on revealing my identity at this point"
 - Upstream author reference: [glKarin](https://github.com/glKarin)
 - Original Android idTech / Q3E author reference: [n0n3m4](https://github.com/n0n3m4)
 - Upstream reference: [glKarin/com.n0n3m4.diii4a](https://github.com/glKarin/com.n0n3m4.diii4a)
@@ -51,5 +53,6 @@ idTech4Amm/build/outputs/apk/debug/idTech4Amm-debug.apk
 ## Notes
 
 - This repository contains the Luna Game 3D customization layer built on top of upstream open-source engine work.
+- This project is not the original `Luna Game` fangame series release. The original series is credited to its anonymous creator on the official `lunaga.me` site.
 - Please keep upstream attribution when redistributing modified builds or source snapshots.
 - If you use this project as a base, keep the `Luna Game 3D` and `Luna Game` project naming clear when referring to this customized fork.
