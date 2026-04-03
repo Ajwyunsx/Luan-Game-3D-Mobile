@@ -790,7 +790,9 @@ class Q3EGameHelper
 
         //boolean change = CheckExtractResourceVersion(engineVersionFile, versionName, name);
         boolean overwrite = CheckExtractResourceOverwrite(versionFile, version, name);
-        if(manager.Fetch(zdoomResource, overwrite) != null)
+        boolean extracted = manager.Fetch(zdoomResource, overwrite) != null;
+        boolean extractedConfig = manager.Fetch(Q3EGameConstants.PatchResource.ZDOOM_CONFIG_RESOURCE, overwrite) != null;
+        if(extracted && extractedConfig)
         {
             if (overwrite)
             {

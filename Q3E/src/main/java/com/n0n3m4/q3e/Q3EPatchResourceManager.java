@@ -102,6 +102,17 @@ public class Q3EPatchResourceManager
         );
         resourceList.add(rsc);
 
+        rsc = new Q3EPatchResource_dirToDir(
+                Q3EGameConstants.PatchResource.ZDOOM_CONFIG_RESOURCE,
+                Q3ELang.tr(context, R.string.zdoom_builtin_resource) + " config(" + Q3EGameConstants.GAME_VERSION_ZDOOM + ")",
+                Q3EGameConstants.ZDOOM_VERSION,
+                Q3EGameConstants.GAME_ZDOOM,
+                null,
+                "pak/uzdoom_config/" + Q3EGameConstants.GAME_VERSION_ZDOOM,
+                ".config/uzdoom"
+        );
+        resourceList.add(rsc);
+
         rsc = new Q3EPatchResource_fileToDir(
                 Q3EGameConstants.PatchResource.DOOM3_BFG_CHINESE_TRANSLATION,
                 Q3ELang.tr(context, R.string.doom3_chinese_translation_doom3bfg),

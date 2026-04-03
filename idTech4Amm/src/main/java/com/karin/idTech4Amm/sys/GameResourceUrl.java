@@ -53,11 +53,6 @@ public enum GameResourceUrl
     // Doom3 BFG
     D3BFG_BASE(Q3EGameConstants.GAME_DOOM3BFG, "base", "", "https://store.steampowered.com/app/208200/DOOM_3/", 2),
     D3BFG_RB(Q3EGameConstants.GAME_DOOM3BFG, "base", "", "https://www.moddb.com/mods/rbdoom-3-bfg", 3),
-
-    // ZDOOM
-    ZDOOM_DOOM1(Q3EGameConstants.GAME_ZDOOM, "doom", "", "https://store.steampowered.com/app/2280/DOOM__DOOM_II", 2),
-    ZDOOM_DOOM2(Q3EGameConstants.GAME_ZDOOM, "doom2", "", "https://store.steampowered.com/app/2280/DOOM__DOOM_II", 2),
-
     // Wolfenstein: Enemy Territory
     ETW_BASE(Q3EGameConstants.GAME_ETW, "etmain", "ET: LEGACY", "https://www.etlegacy.com", 1),
     ETW_LEGACY(Q3EGameConstants.GAME_ETW, "etmain", "", "https://www.splashdamage.com/games/wolfenstein-enemy-territory/", 1),

@@ -67,10 +67,6 @@ public enum Game
     // ZDOOM
     //ZDOOM_BASE(Q3EGameConstants.GAME_ZDOOM, "", "", "", false, R.string.doom_base),
     ZDOOM_LUNA(Q3EGameConstants.GAME_ZDOOM, "RESSOURCES.wad", "RESSOURCES.wad", "uzdoom", "", "RESSOURCES.wad", true, R.string.luna_game_3d_base),
-    ZDOOM_DOOM1(Q3EGameConstants.GAME_ZDOOM, "DOOM.WAD", "DOOM.WAD", "uzdoom", "", "DOOM.WAD", true, R.string.doom1_base),
-    ZDOOM_DOOM2(Q3EGameConstants.GAME_ZDOOM, "DOOM2.WAD", "DOOM2.WAD", "uzdoom", "", "DOOM2.WAD", true, R.string.doom2_base),
-    ZDOOM_FREEDOOM1(Q3EGameConstants.GAME_ZDOOM, "freedoom1.wad", "freedoom1.wad", "uzdoom", "", "freedoom1.wad", true, R.string.freedoom1_base),
-    ZDOOM_FREEDOOM2(Q3EGameConstants.GAME_ZDOOM, "freedoom2.wad", "freedoom2.wad", "uzdoom", "", "freedoom2.wad", true, R.string.freedoom2_base),
 
     // Wolfenstein: Enemy Territory
     ETW_BASE(Q3EGameConstants.GAME_ETW, "etmain", "", "etwgame", "", "etmain", false, R.string.etw_base),
