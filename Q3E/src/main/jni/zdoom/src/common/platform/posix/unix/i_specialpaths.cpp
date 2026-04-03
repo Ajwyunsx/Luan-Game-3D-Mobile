@@ -81,6 +81,27 @@ FString GetUserFile (const char *file)
 {
 	struct stat info;
 
+#if defined(__ANDROID__) && defined(_DIII4A)
+	extern const char * Sys_GameDataDefaultPath(void);
+
+	FString path = NicePath(FStringf("%s/.config", Sys_GameDataDefaultPath()).GetChars());
+
+	if (stat(path.GetChars(), &info) == -1)
+	{
+		if (mkdir(path.GetChars(), S_IRUSR | S_IWUSR | S_IXUSR) == -1)
+		{
+			I_FatalError("Failed to create %s directory:\n%s", path.GetChars(), strerror(errno));
+		}
+	}
+	else if (!S_ISDIR(info.st_mode))
+	{
+		I_FatalError("%s must be a directory", path.GetChars());
+	}
+
+	path += "/";
+	path += file;
+	return path;
+#else
 	FString path = FStringf("%s/" GAMENAMELOWERCASE "/", GetConfigPath());
 	path = NicePath(path.GetChars());
 
@@ -116,6 +137,7 @@ FString GetUserFile (const char *file)
 	}
 	path += file;
 	return path;
+#endif
 }
 
 //===========================================================================

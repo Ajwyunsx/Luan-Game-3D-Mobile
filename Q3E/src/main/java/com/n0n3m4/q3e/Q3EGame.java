@@ -76,7 +76,7 @@ public enum Q3EGame
 
     ZDOOM(Q3EGameConstants.GAME_ID_ZDOOM, Q3EGameConstants.GAME_ZDOOM, Q3EGameConstants.LIB_ENGINE1_DOOM, Q3EGameConstants.GAME_NAME_ZDOOM, Q3EGameConstants.GAME_BASE_ZDOOM,
             Q3EGameConstants.GAME_VERSION_ZDOOM, Q3EGameConstants.GAME_SUBDIR_ZDOOM, Q3EGameConstants.CONFIG_FILE_ZDOOM,
-            "iwad", null, null, ".config/uzdoom",
+            "iwad", null, null, ".config",
             Q3EPreference.pref_harm_zdoom_fs_game, Q3EPreference.pref_harm_zdoom_user_mod, Q3EPreference.pref_harm_zdoom_game_mod, Q3EPreference.pref_harm_zdoom_game_lib, Q3EPreference.pref_params_zdoom, Q3EPreference.pref_harm_zdoom_command_record, null, Q3EPreference.pref_harm_zdoom_env,
             KeyCodesSDL.class, Q3EGameConstants.FEATURE_ZDOOM, Q3EGameConstants.ENGINE_IDTECH_1
     ),

@@ -109,7 +109,7 @@ public class Q3EPatchResourceManager
                 Q3EGameConstants.GAME_ZDOOM,
                 null,
                 "pak/uzdoom_config/" + Q3EGameConstants.GAME_VERSION_ZDOOM,
-                ".config/uzdoom"
+                ".config"
         );
         resourceList.add(rsc);
 
